@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta codigoSemana2="1977537875">
+    <link rel="stylesheet" href="style/style.css">
+    <title>PWeb - Lucas Queiroz</title>
+</head>
+<body>
+
+	<ul>
+		<li><a href="index.html">Inicio</a></li><hr>
+		<li><a href="noticias.html">Canais de Notícias</a></li><hr>
+		<li><a class="active" href="#contact">Adicionar pessoa</a></li>
+		<li><a href="listarPessoas.html">Listar pessoas</a></li><hr>
+		<li><a href="sobre.html">Sobre o site</a></li>
+		<li><a href="contato.html">Mande um e-Mail</a></li>
+	</ul>
+
+	<div style="margin-left:25%;padding:1px 16px;height:1000px;"/>
+	<h1>Formulário para cada</h1>
+
+	<form action="adicionadaComSucesso.html" method="get">
+		<label for="fname">Nome completo *:</label>
+		<input placeholder="Seu nome completo" type="text" id="fname" name="fname"><br><br>
+		<label for="lname">Data de nascimento *:</label>
+		<input placeholder="dd/mm/aaaa" type="text" id="lname" name="lname"><br><br>
+		<label for="lname">e-Mail *:</label>
+		<input placeholder="nome@dominio.com" type="text" id="lname" name="lname"><br><br>	  	  
+	  
+		<label for="lname">Sexo*:</label>
+		<br><br>
+		<input type="radio" id="huey" name="drone" value="huey">
+		<label for="huey">Masculino</label>
+		<br><br>
+		<input type="radio" id="dewey" name="drone" value="dewey">
+		<label for="dewey">Feminino</label>
+		<br><br>
+		<input type="radio" id="louie" name="drone" value="louie">
+		<label for="louie">Não informar</label>
+		<br><br>
+		
+		<button type="reset" value="Reset" class="button">Limpar</button>
+		<button class="button">Cadastrar!</button>
+	</form>
+	<br>
+		* Campo Obrigatório
+	
+</body>
+</html>
