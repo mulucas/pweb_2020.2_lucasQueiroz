@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listagem</title>
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+
+ <br/><br/>
+ 	<form action="pesquisarcliente" method="post">
+ 		<label>Pesquisa por Produto:</label>
+ 		<input name="nomepesquisa">
+ 		<input type="submit" value="Buscar" class="waves-effect waves-light btn">
+ 	</form>
+ <br/><br/>
+ 
+ <table>
+  <tr th:each = "cliente : ${clientes}">
+	  <td th:text = "${cliente.id}"></td>
+	  <td th:text = "${cliente.nomeCompleto}"></td>
+	  <td th:text = "${cliente.genero}"></td>
+	  <td th:text = "${cliente.endereco}"></td>
+	  <td th:text = "${cliente.email}"></td>
+	  <td th:text = "${cliente.cep}"></td>
+	  <td><a th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">Editar</a> </td>
+	  <td><a th:href="@{/removercliente/{idcliente}(idcliente=${cliente.id})}">Excluir</a> </td>
+  </tr>
+ </table>
+ 
+ <a href="/cadastroCliente">Cadastro de clientes</a>
+ 
+ <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+ <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

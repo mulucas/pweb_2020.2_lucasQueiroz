@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Listagem</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ 	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/">Inicio</a></li><hr>
+		<li><a href="/cadastroCliente">Adicionar Cliente</a></li>
+		<li><a class="active">Listar Clientes</a></li><hr>
+		<li><a href="sobre.html">Sobre o site</a></li>
+		<li><a href="contato.html">Mande um e-Mail</a></li>
+	</ul>
+
+	<div style="margin-left:25%;padding:1px 16px;height:1000px;"/>
+ <br/><br/>
+ 	<form action="pesquisarCliente" method="post">
+ 		<label>Pesquisa por Cliente:</label>
+ 		<input name="nomePesquisa">
+ 		<input type="submit" value="Buscar" class="waves-effect waves-light btn">
+ 	</form>
+ <br/><br/>
+ 
+ <table>
+  <tr th:each = "cliente : ${clientes}">
+	  <td th:text = "${cliente.id}"></td>
+	  <td th:text = "${cliente.nomeCompleto}"></td>
+	  <td th:text = "${cliente.genero}"></td>
+	  <td th:text = "${cliente.endereco}"></td>
+	  <td th:text = "${cliente.email}"></td>
+	  <td th:text = "${cliente.cep}"></td>
+	  <td><a th:href="@{/editarCliente/{idCliente}(idCliente=${cliente.id})}">Editar</a> </td>
+	  <td><a th:href="@{/removerCliente/{idCliente}(idCliente=${cliente.id})}">Excluir</a> </td>
+  </tr>
+ </table>
+ 
+ <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+ <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>
