@@ -12,10 +12,10 @@
 <body>
 	<ul>
 		<li><a href="/">Inicio</a></li><hr>
-		<li><a class="active">Adicionar Cliente</a></li>
-		<li><a href="/listaClientes">Listar Clientes</a></li><hr>
-		<li><a href="sobre.html">Sobre o site</a></li>
-		<li><a href="contato.html">Mande um e-Mail</a></li>
+		<li><a class="active" href="/cadastroCliente">Adicionar Cliente</a></li>
+		<li><a href="/cadastroProduto">Adicionar Produto</a></li><hr>
+		<li><a href="/listaClientes">Listar Clientes</a></li>
+		<li><a href="/listaProdutos">Listar Produtos</a></li><hr>
 	</ul>
 	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
 		<form action="salvarcliente" method="post" th:object="${clienteObj}">

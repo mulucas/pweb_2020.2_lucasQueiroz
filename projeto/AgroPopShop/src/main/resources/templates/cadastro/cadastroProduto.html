@@ -3,34 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cadastro</title>
-
+	<link rel="stylesheet" href="css/style.css">
  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
   	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	
 	<ul>
 		<li><a href="/">Inicio</a></li><hr>
 		<li><a class="active">Adicionar produto</a></li>
-		<li><a href="/listaPedidos">Listar produtos</a></li><hr>
-		<li><a href="sobre.html">Sobre o site</a></li>
-		<li><a href="contato.html">Mande um e-Mail</a></li>
+		<li><a href="/cadastroProduto">Adicionar Produto</a></li><hr>
+		<li><a href="/listaClientes">Listar Clientes</a></li>
+		<li><a href="/listaProdutos">Listar Produtos</a></li>
 	</ul>
 	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
 		<form action="salvarproduto" method="post" th:object="${produtoObj}">
+			<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+			  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+			</div>
 			<label>ID</label>
 			<input name="id" th:field="*{id}" readonly="readonly">
-			<label>Nome Completo</label>
-			<input name="nome" th:field="*{nomeCompleto}">
-			<label>Genero</label>
-			<input name="sobrenome" th:field="*{genero}">
-			<label>Endereco</label>
-			<input name="endereco" th:field="*{endereco}">
-			<label>email</label>
-			<input name="email" th:field="*{email}">
-			<label>CEP</label>
-			<input name="cep" th:field="*{cep}">
+			<label>Nome</label>
+			<input name="nome" th:field="*{nome}">
+			<label>marca</label>
+			<input name="marca" th:field="*{marca}">
+			<label>altura</label>
+			<input name="altura" th:field="*{altura}">
+			<label>largura</label>
+			<input name="largura" th:field="*{largura}">
+			<label>profundidade</label>
+			<input name="profundidade" th:field="*{profundidade}">
+			<label>peso</label>
+			<input name="peso" th:field="*{peso}">
+			<label>preco</label>
+			<input name="preco" th:field="*{preco}">
 			
 			<input class="waves-effect waves-light btn" type="submit" value="Salvar">
 	 	</form>
