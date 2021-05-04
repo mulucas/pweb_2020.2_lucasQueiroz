@@ -11,7 +11,7 @@ import br.com.pessoa.enums.Genero;
 
 @Entity
 public class Pessoa {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -19,7 +19,7 @@ public class Pessoa {
 	private String emial;
 	private Genero genero;
 	private LocalDate dataNascimento;
-	
+
 	public Pessoa() {
 		super();
 	}
@@ -72,9 +72,5 @@ public class Pessoa {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
-	
-	
-	
 
 }

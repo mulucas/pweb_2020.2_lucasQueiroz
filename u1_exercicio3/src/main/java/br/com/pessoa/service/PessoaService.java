@@ -40,7 +40,7 @@ public class PessoaService {
 	public void deletarPessoa(Integer id) {
 		repo.deleteById(id);
 	}
-	
+
 	public Optional<Pessoa> buscarPorId(Integer id) {
 		Optional<Pessoa> pessoa = repo.findById(id);
 		return pessoa;
