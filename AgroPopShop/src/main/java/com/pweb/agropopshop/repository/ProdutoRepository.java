@@ -7,8 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.pweb.agropopshop.model.Produto;
 
-public interface ProdutoRepository extends JpaRepository<Produto, Long>{
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	@Query("select p from Produto p where p.nome like %?1%")
 	List<Produto> buscarProdutoPorNome(String nome);
+	
+	@Query("select p from Produto p order by p.nome asc")
+	List<Produto> listaPorNome();
 }

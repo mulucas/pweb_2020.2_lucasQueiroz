@@ -1,6 +1,8 @@
 package com.pweb.agropopshop.controller;
 
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,7 @@ public class ProdutoController {
 	@RequestMapping(method = RequestMethod.GET, value = "/listaProdutos")
 	public ModelAndView listaprodutos() {
 		andView = new ModelAndView("lista/listaProdutos");
-		Iterable<Produto> produtosIt = produtoRepository.findAll();
+		Iterable<Produto> produtosIt = produtoRepository.listaPorNome();
 		andView.addObject("produtos", produtosIt);
 		return andView;
 	}

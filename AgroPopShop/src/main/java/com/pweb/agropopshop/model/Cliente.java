@@ -1,9 +1,13 @@
 package com.pweb.agropopshop.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -21,6 +25,17 @@ public class Cliente {
 	private String email;
 
 	private String cep;
+
+	@OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<ClienteDependente> clientesDependentes;
+
+	public List<ClienteDependente> getClientesDependentes() {
+		return clientesDependentes;
+	}
+
+	public void setClientesDependentes(List<ClienteDependente> clientesDependentes) {
+		this.clientesDependentes = clientesDependentes;
+	}
 
 	public Long getId() {
 		return id;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Listagem</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ 	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/">Inicio</a></li><hr>
+		<li><a href="/cadastroCliente">Adicionar Cliente</a></li>
+		<li><a href="/cadastroProduto">Adicionar Produto</a></li><hr>
+		<li><a class="active" href="/listaClientes">Listar Clientes</a></li>
+		<li><a href="/listaProdutos">Listar Produtos</a></li><hr>
+	</ul>
+
+	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+		<div th:each="c: ${clienteobj}">
+			<div class="row">
+				<p>
+					ID: <span th:text="${c.id}"></span>
+				</p>
+				<p>
+					Nome Completo: <span th:text="${c.nomeCompleto}"></span>
+				</p>
+			</div>
+		</div>
+		<h5>Telefones</h5>
+	
+		<div class="row">
+			<form
+				th:action="@{/addclientedependente/{clienteid}(clienteid=${clienteobj.id})}"
+				method="post" class="col s12" onsubmit="return validarCampos()? true : false;">
+				<div class="row">
+					<div class="input-field col s4">
+						<label class="active" for="nomeCompleto">nomeCompleto:</label> <input
+							id="nomeCompleto" name="nomeCompleto" class="validate">
+					</div>
+					<div class="input-field col s4">
+						<input type="date" id="dataNascimento" name="dataNascimento" class="validate">
+					</div>
+					<div class="input-field col s4">
+						<label class="active" for="genero">genero:</label> <input id="genero"
+							name="genero" class="validate">
+					</div>
+	
+					<input type="submit" value="Adicionar"
+						class="waves-effect waves-light btn">
+				</div>
+	
+			</form>
+		</div>
+	
+		<table class="striped">
+			<tr th:each="cd : ${clientesdependentes}">
+				<th th:text=${cd.nomeCompleto}></th>
+				<th th:text=${cd.dataNascimento}></th>
+				<th th:text=${cd.genero}></th>
+				<td><a
+					th:href="@{/removerclientedependente/{idClientesDependente}(idClientesDependente=${cd.id})}">Excluir</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	 <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+	 <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+
+							$('#dataNascimento').datepicker({
+								showOthermonths:true,
+								format: 'yyyy-mm-dd'
+							});
+							function validarCampos(){
+								numero = document.getElementById('numero').value;
+								tipo = document.getElementById('tipo').value;
+								
+								if(numero ===''){
+									alert('numero vazio')
+									return false;
+								}else if(tipo === ''){
+									alert('tipo vazio')
+									return false;
+								}
+								return true;
+							}		
+						});
+	</script>
+</body>
+</html>
