@@ -25,14 +25,14 @@
 					ID: <span th:text="${c.id}"></span>
 				</p>
 				<p>
-					Nome Completo: <span th:text="${c.nomeCompleto}"></span>
+					Cliente: <span th:text="${c.nomeCompleto}"></span>
 				</p>
 			</div>
 		</div>
-		<h5>Telefones</h5>
+		<h5>Clientes Dependentes</h5>
 	
 		<div class="row">
-			<form
+			<form th:object="${clienteDependente}"
 				th:action="@{/addclientedependente/{clienteid}(clienteid=${clienteobj.id})}"
 				method="post" class="col s12" onsubmit="return validarCampos()? true : false;">
 				<div class="row">
@@ -44,8 +44,12 @@
 						<input type="date" id="dataNascimento" name="dataNascimento" class="validate">
 					</div>
 					<div class="input-field col s4">
-						<label class="active" for="genero">genero:</label> <input id="genero"
-							name="genero" class="validate">
+							<label for="sexo" class="active">Sexo</label> 
+							<select class="browser-default" th:field="*{sexo}">
+							<option value="" disabled selected="selected">--Escolha--</option>
+							<option value="MASCULINO" th:text="Masculino" />
+							<option value="FEMININO" th:text="Feminino" />
+						</select>
 					</div>
 	
 					<input type="submit" value="Adicionar"
@@ -59,7 +63,7 @@
 			<tr th:each="cd : ${clientesdependentes}">
 				<th th:text=${cd.nomeCompleto}></th>
 				<th th:text=${cd.dataNascimento}></th>
-				<th th:text=${cd.genero}></th>
+				<th th:text=${cd.sexo}></th>
 				<td><a
 					th:href="@{/removerclientedependente/{idClientesDependente}(idClientesDependente=${cd.id})}">Excluir</a>
 				</td>
@@ -79,8 +83,8 @@
 								format: 'yyyy-mm-dd'
 							});
 							function validarCampos(){
-								numero = document.getElementById('numero').value;
-								tipo = document.getElementById('tipo').value;
+								numero = document.getElementById('nomeCompleto').value;
+								tipo = document.getElementById('dataNascimento').value;
 								
 								if(numero ===''){
 									alert('numero vazio')

@@ -43,6 +43,7 @@ public class ClienteDependenteController {
 
 		Optional<Cliente> cliente = clienteRepository.findById(idcliente);
 		
+		andViewClienteDependente.addObject("clienteDependente", new ClienteDependente());
 		andViewClienteDependente.addObject("clienteobj", cliente.get());
 		andViewClienteDependente.addObject("clientesdependentes", clienteDependenteRepository.getClienteDependentes(idcliente));
 		return andViewClienteDependente;

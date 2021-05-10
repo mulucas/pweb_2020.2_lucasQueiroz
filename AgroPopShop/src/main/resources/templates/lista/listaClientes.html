@@ -24,7 +24,8 @@
 		 		<input name="nomePesquisa">
 		 		<input type="submit" value="Buscar" class="waves-effect waves-light btn">
 		 	</form>
-		 <br/><br/>
+		 <br/>
+		<h5>Ao clicar no nome você adiciona seus dependentes</h5>
 		 
 		 <table>
 		  <tr th:each = "cliente : ${clientes}">
@@ -32,9 +33,13 @@
 			  <td> <a th:href="@{/clientesDependentes/{idcliente}(idcliente=${cliente.id})}">
 			  	<span th:text = "${cliente.nomeCompleto}"></span></a></td>
 			  <td th:text = "${cliente.genero}"></td>
-			  <td th:text = "${cliente.endereco}"></td>
 			  <td th:text = "${cliente.email}"></td>
 			  <td th:text = "${cliente.cep}"></td>
+			  <td th:text = "${cliente.rua}"></td>
+			  <td th:text = "${cliente.bairro}"></td>
+			  <td th:text = "${cliente.cidade}"></td>
+			  <td th:text = "${cliente.uf}"></td>
+			  <td th:text = "${cliente.ibge}"></td>
 			  <td><a th:href="@{/editarCliente/{idCliente}(idCliente=${cliente.id})}">Editar</a> </td>
 			  <td><a th:href="@{/removerCliente/{idCliente}(idCliente=${cliente.id})}">Excluir</a> </td>
 		  </tr>
