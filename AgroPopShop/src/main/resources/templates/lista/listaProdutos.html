@@ -27,15 +27,29 @@
 		 <br/><br/>
 		 
 		 <table>
+		 <thead>
+           		<tr>
+               		<th>id</th>
+                	<th>Nome</th>
+                	<th>Marca</th>
+                	<th>Altura</th>
+                	<th>Largura</th>
+                	<th>Peso</th>
+                	<th>Volume</th>
+                	<th>Preco</th>
+                	<th>Profundidade</th>
+            	</tr>
+        	</thead>
 		  <tr th:each = "produto : ${produtos}">
 			  <td th:text = "${produto.id}"></td>
 			  <td th:text = "${produto.nome}"></td>
 			  <td th:text = "${produto.marca}"></td>
 			  <td th:text = "${produto.altura}"></td>
 			  <td th:text = "${produto.largura}"></td>
-			  <td th:text = "${produto.profundidade}"></td>
 			  <td th:text = "${produto.peso}"></td>
+			  <td th:text = "${produto.volume}"></td>
 			  <td th:text = "${produto.preco}"></td>
+			  <td th:text = "${produto.profundidade}"></td>
 			  <td><a th:href="@{/editarProduto/{idproduto}(idproduto=${produto.id})}">Editar</a> </td>
 			  <td><a th:href="@{/removerProduto/{idproduto}(idproduto=${produto.id})}">Excluir</a> </td>
 		  </tr>

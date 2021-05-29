@@ -26,6 +26,8 @@ public class Produto {
 
 	private double preco;
 
+	private double volume;
+
 	public Long getId() {
 		return id;
 	}
@@ -88,6 +90,14 @@ public class Produto {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+
+	public double getVolume() {
+		return volume;
+	}
+
+	public void setVolume(double volume) {
+		this.volume = volume;
 	}
 
 }

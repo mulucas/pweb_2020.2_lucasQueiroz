@@ -35,6 +35,7 @@ public class ProdutoController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarproduto")
 	public ModelAndView salvar(Produto produto) {
+		produto.setVolume(produto.getAltura()*produto.getProfundidade()*produto.getLargura());
 		produtoRepository.save(produto);
 		andView = new ModelAndView("adicionado/produtoAdicionado");
 		andView.addObject("produtoObj", new Produto());

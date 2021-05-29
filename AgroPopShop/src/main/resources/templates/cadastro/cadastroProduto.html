@@ -24,10 +24,6 @@
 	</ul>
 	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
 		<form action="salvarproduto" method="post" th:object="${produtoObj}">
-			<div class="mb-3">
-			  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-			  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-			</div>
 			<label>ID</label>
 			<input name="id" th:field="*{id}" readonly="readonly">
 			<label>Nome</label>
