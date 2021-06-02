@@ -15,15 +15,18 @@ public class FotoService {
 	@Autowired
 	private FotoRepository imageGalleryRepository;
 	
-	public void saveImage(Foto imageGallery) {
+	public void salvarFoto(Foto imageGallery) {
 		imageGalleryRepository.save(imageGallery);	
+	}
+	public void excluiFoto(Foto imageGallery) {
+		imageGalleryRepository.delete(imageGallery);	
 	}
 
 	public List<Foto> getAllActiveImages() {
 		return imageGalleryRepository.findAll();
 	}
 
-	public Optional<Foto> getImageById(Long id) {
+	public Optional<Foto> getFotoById(Long id) {
 		return imageGalleryRepository.findById(id);
 	}
 }

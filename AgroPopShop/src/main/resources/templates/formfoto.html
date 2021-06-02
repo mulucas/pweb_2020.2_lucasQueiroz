@@ -1,46 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Fotos</title>
+  <title>PixelTrice</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<ul>
-		<li><a href="/">Inicio</a></li><hr>
-		<li><a class="active">Adicionar produto</a></li>
-		<li><a href="/cadastroCliente">Adicionar Cliente</a></li><hr>
+		<li><a href="/">Inicio</a></li>
+		<li><a href="/cadastroCliente">Adicionar Cliente</a></li>
+		<li><a href="/cadastroProduto">Adicionar Produto</a></li>
 		<li><a href="/listaClientes">Listar Clientes</a></li>
-		<li><a href="/listaProdutos">Listar Produtos</a></li>
+		<li><a class="active" href="/listaProdutos">Listar Produtos</a></li>
 	</ul>
-	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
-	<h1 class="text-center">Imagens do produto</h1><br><br>
-	<div class="contact py-sm-5 py-4">
-		<div class="container py-xl-4 py-lg-2">
-		<!-- form -->
-		<form id="form">
-				<div class="contact-grids1 w3agile-6">
-					<div class="row">
-						<div class="col-md-6 col-sm-6 contact-form1 form-group">
-							<label class="col-form-label">foto:</label>
-							<input type="file" class="form-control" placeholder="" name="image" id="image" required="required">
-							<p id="error_file"></p>
-						</div>
-					</div>
-						<div class="right-w3l col-md-6">
-							<input type="button" id="submit" class="btn btn-primary form-control" value="Submit">
-							<br><br>
-						</div>
-						<a href="/image/show" style="float:left;" class="btn btn-success text-right">ver fotos</a>
-				</div>
-				<br>
-				<div id="success" class="text-center" style="color:green;"></div>
-				<div id="error" class="text-center" style="color:red;"></div>
-			</form>
+
+	<div style="margin-left:21%;padding:1px 16px;height:1000px;">
+	<div class="card" style="width: 18rem;">
+	    <h4 class="card-title">Produto</h4>
+		<div class="card-body" th:each="p: ${produtoobj}">
+			<div class="row">
+				<p class="card-text">
+					ID: <span th:text="${p.id}"></span>
+				</p>
+				<p>
+					Produto: <span th:text="${p.nome}"></span>
+				</p>
+				<p>
+					Marca: <span th:text="${p.marca}"></span>
+				</p>
+				<p>
+					Preço: R$ <span th:text="${p.preco}"></span>
+				</p>
+			</div>
+	  </div>
+	
 		</div>
+		<div class="contact py-sm-5 py-4">
+			<div class="container py-xl-4 py-lg-2">
+			<!-- form -->
+			<form id="form">
+					<div class="contact-grids1 w3agile-6">
+						<div class="row">
+							<div class="col-md-5 col-sm-5 contact-form1 form-group">
+								<label class="col-form-label">Image</label>
+								<input type="file" class="form-control" placeholder="" name="image" id="image" required="required">
+								<p id="error_file"></p>
+							</div>
+						</div>
+						
+							<div class="right-w3l col-md-5">
+								<input type="button" id="submit" class="btn btn-primary form-control" value="Submit">
+								<br><br>
+							</div>
+					</div>
+					<br>
+					<div id="success" class="text-center" style="color:green;"></div>
+					<div id="error" class="text-center" style="color:red;"></div>
+				</form>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered text-center">
+	        <thead>
+	            <tr>
+	                <th>ID</th>
+	                <th>Foto</th>
+	                <th></th>
+	            </tr>
+	        </thead>
+	        <tbody th:with="count=0">
+	        <tr th:each = "imageGallery, hh : ${images}">           
+	                <td th:text="${imageGallery.id}"></td>
+	                <td><img th:src="@{${'/image/display/'+ imageGallery.id}}" 
+	                class="card img-fluid" style="width:300px" alt=""/></td>
+	               <td><a th:href="@{/image/imageDetails(id=${imageGallery.id})}"  class="btn btn-danger" target="_blank">Excluir</a></td>
+	            </tr>
+	        </tbody>
+    	</table>
 	</div>
-</div>
 	<script src="/js/product.js"></script>
 </body>
 </html>

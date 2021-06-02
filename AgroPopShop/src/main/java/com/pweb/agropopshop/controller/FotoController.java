@@ -26,8 +26,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.pweb.agropopshop.model.Cliente;
+import com.pweb.agropopshop.model.ClienteDependente;
 import com.pweb.agropopshop.model.Foto;
+import com.pweb.agropopshop.model.Produto;
+import com.pweb.agropopshop.repository.ProdutoRepository;
 import com.pweb.agropopshop.service.FotoService;
 
 @Controller
@@ -40,10 +45,20 @@ public class FotoController {
 	private FotoService imageGalleryService;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private ModelAndView andViewClienteDependente = new ModelAndView("formfoto");
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
-	@GetMapping(value = {"/foto"})
-	public String addProductPage() {
-		return "formfoto";
+	@GetMapping("/foto/{idproduto}")
+	public ModelAndView addProductPage(@PathVariable("idproduto") Long idproduto, Model map) {
+		
+		Optional<Produto> produto = produtoRepository.findById(idproduto);
+		
+		andViewClienteDependente.addObject("produtoobj", produto.get());
+		show(map);
+		return andViewClienteDependente;
 	}
 
 	@PostMapping("/image/saveImageDetails")
@@ -77,7 +92,7 @@ public class FotoController {
 			byte[] imageData = file.getBytes();
 			Foto imageGallery = new Foto();
 			imageGallery.setImage(imageData);
-			imageGalleryService.saveImage(imageGallery);
+			imageGalleryService.salvarFoto(imageGallery);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
 		} catch (Exception e) {
@@ -92,7 +107,7 @@ public class FotoController {
 	void showImage(@PathVariable("id") Long id, HttpServletResponse response, Optional<Foto> imageGallery)
 			throws ServletException, IOException {
 		log.info("Id :: " + id);
-		imageGallery = imageGalleryService.getImageById(id);
+		imageGallery = imageGalleryService.getFotoById(id);
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 		response.getOutputStream().write(imageGallery.get().getImage());
 		response.getOutputStream().close();
@@ -103,8 +118,8 @@ public class FotoController {
 		try {
 			log.info("Id :: " + id);
 			if (id != 0) {
-				imageGallery = imageGalleryService.getImageById(id);
-			
+				imageGallery = imageGalleryService.getFotoById(id);
+//				imageGalleryService.excluiFoto(id);
 				log.info("products :: " + imageGallery);
 				if (imageGallery.isPresent()) {
 					model.addAttribute("id", imageGallery.get().getId());

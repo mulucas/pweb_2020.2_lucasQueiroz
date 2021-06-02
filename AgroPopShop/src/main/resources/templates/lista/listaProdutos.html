@@ -17,7 +17,7 @@
 		<li><a class="active" href="/listaProdutos">Listar Produtos</a></li><hr>
 	</ul>
 
-	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+	<div style="margin-left:20%;padding:1px 16px;height:1000px;">
 		<br/><br/>
 			<form action="pesquisarProduto" method="post">
 		 		<label>Pesquisa por Produto:</label>
@@ -50,7 +50,7 @@
 			  <td th:text = "${produto.volume}"></td>
 			  <td th:text = "${produto.preco}"></td>
 			  <td th:text = "${produto.profundidade}"></td>
-			  <td><a th:href="@{/foto}">Cadastrar Foto</a> </td>
+			  <td><a th:href="@{/foto/{idproduto}(idproduto=${produto.id})}">Cadastrar Foto</a> </td>
 			  <td><a th:href="@{/editarProduto/{idproduto}(idproduto=${produto.id})}">Editar</a> </td>
 			  <td><a th:href="@{/removerProduto/{idproduto}(idproduto=${produto.id})}">Excluir</a> </td>
 		  </tr>
