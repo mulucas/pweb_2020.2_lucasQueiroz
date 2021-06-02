@@ -1,8 +1,5 @@
 package com.pweb.agropopshop.controller;
 
-
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;

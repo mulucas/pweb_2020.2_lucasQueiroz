@@ -50,6 +50,7 @@
 			  <td th:text = "${produto.volume}"></td>
 			  <td th:text = "${produto.preco}"></td>
 			  <td th:text = "${produto.profundidade}"></td>
+			  <td><a th:href="@{/foto}">Cadastrar Foto</a> </td>
 			  <td><a th:href="@{/editarProduto/{idproduto}(idproduto=${produto.id})}">Editar</a> </td>
 			  <td><a th:href="@{/removerProduto/{idproduto}(idproduto=${produto.id})}">Excluir</a> </td>
 		  </tr>
