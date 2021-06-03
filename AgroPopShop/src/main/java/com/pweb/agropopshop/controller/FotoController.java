@@ -100,6 +100,7 @@ public class FotoController {
 			foto.setProduto(produto);
 			imageGalleryService.salvarFoto(foto);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+//			show(model, idProdutoAtual);
 			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,24 +121,12 @@ public class FotoController {
 	}
 
 	@GetMapping("/image/imageDetails")
-	String showProductDetails(@RequestParam("id") Long id, Optional<Foto> imageGallery, Model model) {
-		try {
-			log.info("Id :: " + id);
-			if (id != 0) {
-				imageGallery = imageGalleryService.getFotoById(id);
-//				imageGalleryService.excluiFoto(id);
-				log.info("products :: " + imageGallery);
-				if (imageGallery.isPresent()) {
-					model.addAttribute("id", imageGallery.get().getId());
-					return "fotodetails";
-				}
-				return "redirect:/home";
-			}
-			return "redirect:/home";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/home";
-		}
+	public ModelAndView showProductDetails(@RequestParam("id") Long id, Optional<Foto> imageGallery, Model model) {
+
+		imageGallery = imageGalleryService.getFotoById(id);
+		imageGalleryService.excluiFoto(imageGallery.get());
+		
+		return new ModelAndView("excluido");
 	}
 
 	@GetMapping("/image/show")
