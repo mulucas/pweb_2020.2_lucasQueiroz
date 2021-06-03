@@ -1,9 +1,13 @@
 package com.pweb.agropopshop.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Produto {
@@ -27,6 +31,17 @@ public class Produto {
 	private double preco;
 
 	private double volume;
+
+	@OneToMany(mappedBy = "produto", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Foto> fotos;
+
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
+	}
 
 	public Long getId() {
 		return id;

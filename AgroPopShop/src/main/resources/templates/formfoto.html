@@ -42,7 +42,9 @@
 		<div class="contact py-sm-5 py-4">
 			<div class="container py-xl-4 py-lg-2">
 			<!-- form -->
-			<form id="form">
+			<form id="form" th:object="${foto}"
+				th:action="@{/addclientedependente/{produtoid}(produtoid=${produtoobj.id})}"
+				method="post">
 					<div class="contact-grids1 w3agile-6">
 						<div class="row">
 							<div class="col-md-5 col-sm-5 contact-form1 form-group">

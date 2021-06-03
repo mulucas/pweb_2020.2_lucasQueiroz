@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.ls.LSInput;
 
 import com.pweb.agropopshop.model.Cliente;
 import com.pweb.agropopshop.model.ClienteDependente;
@@ -37,7 +39,7 @@ import com.pweb.agropopshop.service.FotoService;
 
 @Controller
 public class FotoController {
-	
+
 	@Value("${uploadDir}")
 	private String uploadFolder;
 
@@ -45,27 +47,28 @@ public class FotoController {
 	private FotoService imageGalleryService;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	private ModelAndView andViewClienteDependente = new ModelAndView("formfoto");
-	
+
+	private Long idProdutoAtual;
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
 	@GetMapping("/foto/{idproduto}")
 	public ModelAndView addProductPage(@PathVariable("idproduto") Long idproduto, Model map) {
-		
 		Optional<Produto> produto = produtoRepository.findById(idproduto);
-		
+		idProdutoAtual = idproduto;
 		andViewClienteDependente.addObject("produtoobj", produto.get());
-		show(map);
+		show(map, idproduto);
 		return andViewClienteDependente;
 	}
 
 	@PostMapping("/image/saveImageDetails")
-	public @ResponseBody ResponseEntity<?> createProduct(Model model, HttpServletRequest request
-			,final @RequestParam("image") MultipartFile file) {
+	public @ResponseBody ResponseEntity<?> createProduct(Model model, HttpServletRequest request,
+			final @RequestParam("image") MultipartFile file) {
 		try {
-			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
+			// String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
 			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
 			log.info("uploadDirectory:: " + uploadDirectory);
 			String fileName = file.getOriginalFilename();
@@ -73,7 +76,8 @@ public class FotoController {
 			log.info("FileName: " + file.getOriginalFilename());
 			if (fileName == null || fileName.contains("..")) {
 				model.addAttribute("invalid", "Sorry! Filename contains invalid path sequence \" + fileName");
-				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName,
+						HttpStatus.BAD_REQUEST);
 			}
 			try {
 				File dir = new File(uploadDirectory);
@@ -90,9 +94,11 @@ public class FotoController {
 				e.printStackTrace();
 			}
 			byte[] imageData = file.getBytes();
-			Foto imageGallery = new Foto();
-			imageGallery.setImage(imageData);
-			imageGalleryService.salvarFoto(imageGallery);
+			Foto foto = new Foto();
+			Produto produto = produtoRepository.findById(idProdutoAtual).get();
+			foto.setImage(imageData);
+			foto.setProduto(produto);
+			imageGalleryService.salvarFoto(foto);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
 		} catch (Exception e) {
@@ -101,7 +107,7 @@ public class FotoController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping("/image/display/{id}")
 	@ResponseBody
 	void showImage(@PathVariable("id") Long id, HttpServletResponse response, Optional<Foto> imageGallery)
@@ -127,17 +133,27 @@ public class FotoController {
 				}
 				return "redirect:/home";
 			}
-		return "redirect:/home";
+			return "redirect:/home";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/home";
-		}	
+		}
 	}
 
 	@GetMapping("/image/show")
-	String show(Model map) {
+	String show(Model map, Long idproduto) {
 		List<Foto> images = imageGalleryService.getAllActiveImages();
-		map.addAttribute("images", images);
+		if (!images.isEmpty()) {
+			List<Foto> fotos = new ArrayList<Foto>();
+			for (Foto foto : images) {
+				if (foto.getProduto().getId() == idProdutoAtual) {
+					fotos.add(foto);
+				}
+			}
+			map.addAttribute("images", fotos);
+		} else {
+			map.addAttribute("images", images);
+		}
 		return "fotos";
 	}
-}	
+}

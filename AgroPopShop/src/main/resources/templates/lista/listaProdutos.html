@@ -17,44 +17,43 @@
 		<li><a class="active" href="/listaProdutos">Listar Produtos</a></li><hr>
 	</ul>
 
-	<div style="margin-left:20%;padding:1px 16px;height:1000px;">
-		<br/><br/>
-			<form action="pesquisarProduto" method="post">
+	<div style="margin-left:21%;padding:1px 16px;height:1000px;">
+		<form action="pesquisarProduto" method="post">
 		 		<label>Pesquisa por Produto:</label>
 		 		<input name="nomePesquisa">
 		 		<input type="submit" value="Buscar" class="waves-effect waves-light btn">
-		 	</form>
-		 <br/><br/>
+		</form>
+		<br/><br/>
 		 
-		 <table>
-		 <thead>
-           		<tr>
-               		<th>id</th>
-                	<th>Nome</th>
-                	<th>Marca</th>
-                	<th>Altura</th>
-                	<th>Largura</th>
-                	<th>Peso</th>
-                	<th>Volume</th>
-                	<th>Preco</th>
-                	<th>Profundidade</th>
-            	</tr>
-        	</thead>
-		  <tr th:each = "produto : ${produtos}">
-			  <td th:text = "${produto.id}"></td>
-			  <td th:text = "${produto.nome}"></td>
-			  <td th:text = "${produto.marca}"></td>
-			  <td th:text = "${produto.altura}"></td>
-			  <td th:text = "${produto.largura}"></td>
-			  <td th:text = "${produto.peso}"></td>
-			  <td th:text = "${produto.volume}"></td>
-			  <td th:text = "${produto.preco}"></td>
-			  <td th:text = "${produto.profundidade}"></td>
-			  <td><a th:href="@{/foto/{idproduto}(idproduto=${produto.id})}">Cadastrar Foto</a> </td>
-			  <td><a th:href="@{/editarProduto/{idproduto}(idproduto=${produto.id})}">Editar</a> </td>
-			  <td><a th:href="@{/removerProduto/{idproduto}(idproduto=${produto.id})}">Excluir</a> </td>
-		  </tr>
-		 </table>
+		<table>
+		<thead>
+        	<tr>
+           		<th>id</th>
+              	<th>Nome</th>
+               	<th>Marca</th>
+               	<th>Altura</th>
+               	<th>Largura</th>
+               	<th>Peso</th>
+               	<th>Volume</th>
+               	<th>Preco</th>
+               	<th>Profundidade</th>
+           	</tr>
+        </thead>
+		<tr th:each = "produto : ${produtos}">
+			<td th:text = "${produto.id}"></td>
+			<td th:text = "${produto.nome}"></td>
+			<td th:text = "${produto.marca}"></td>
+			<td th:text = "${produto.altura}"></td>
+			<td th:text = "${produto.largura}"></td>
+			<td th:text = "${produto.peso}"></td>
+			<td th:text = "${produto.volume}"></td>
+			<td th:text = "${produto.preco}"></td>
+			<td th:text = "${produto.profundidade}"></td>
+			<td><a th:href="@{/foto/{idproduto}(idproduto=${produto.id})}">Cadastrar Foto</a> </td>
+			<td><a th:href="@{/editarProduto/{idproduto}(idproduto=${produto.id})}">Editar</a> </td>
+			<td><a th:href="@{/removerProduto/{idproduto}(idproduto=${produto.id})}">Excluir</a> </td>
+		</tr>
+		</table>
 	 	<br>
  	</div>
  <script type="text/javascript" src="/materialize/js/materialize.js"></script>
