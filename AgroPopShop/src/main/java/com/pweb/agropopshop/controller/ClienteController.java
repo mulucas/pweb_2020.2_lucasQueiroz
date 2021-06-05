@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pweb.agropopshop.model.Cliente;
+import com.pweb.agropopshop.repository.ClienteDependenteRepository;
 import com.pweb.agropopshop.repository.ClienteRepository;
 
 @Controller
@@ -21,7 +22,12 @@ public class ClienteController {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private ClienteDependenteRepository clienteDependenteRepository;
+	
 	private ModelAndView andView;
+	
+	private boolean alterar;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastroCliente")
 	public ModelAndView inicio() {
@@ -32,8 +38,13 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarcliente")
 	public ModelAndView salvar(Cliente cliente) {
-		clienteRepository.save(cliente);
 		andView = new ModelAndView("adicionado/clienteAdicionado");
+		if (alterar) {
+			andView = new ModelAndView("alterado/clienteAlterado");
+			alterar = false;
+		}
+		cliente.setClientesDependentes(clienteDependenteRepository.getClienteDependentes(cliente.getId()));
+		clienteRepository.save(cliente);
 		andView.addObject("clienteObj", new Cliente());
 		return andView;
 
@@ -51,7 +62,7 @@ public class ClienteController {
 	public ModelAndView editar(@PathVariable("idCliente") Long idCliente) {
 		andView = new ModelAndView("cadastro/cadastroCliente");
 		Optional<Cliente> cliente = clienteRepository.findById(idCliente);
-
+		alterar = true;
 		andView.addObject("clienteObj", cliente.get());
 		return andView;
 

@@ -29,5 +29,9 @@ public class FotoService {
 	public Optional<Foto> getFotoById(Long id) {
 		return imageGalleryRepository.findById(id);
 	}
+	
+	public List<Foto> getFotos(Long id) {
+		return imageGalleryRepository.getFotos(id);
+	}
 }
 

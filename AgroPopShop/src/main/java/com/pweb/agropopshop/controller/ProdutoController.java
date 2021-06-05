@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pweb.agropopshop.model.Produto;
 import com.pweb.agropopshop.repository.ProdutoRepository;
+import com.pweb.agropopshop.service.FotoService;
 
 @Controller
 public class ProdutoController {
@@ -21,7 +22,12 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
+	@Autowired
+	private FotoService imageGalleryService;
+	
 	private ModelAndView andView;
+	
+	private boolean alterar;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastroProduto")
 	public ModelAndView inicio() {
@@ -32,9 +38,14 @@ public class ProdutoController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarproduto")
 	public ModelAndView salvar(Produto produto) {
-		produto.setVolume(produto.getAltura()*produto.getProfundidade()*produto.getLargura());
-		produtoRepository.save(produto);
 		andView = new ModelAndView("adicionado/produtoAdicionado");
+		if (alterar) {
+			andView = new ModelAndView("alterado/produtoAlterado");
+			alterar = false;
+		}
+		produto.setVolume(produto.getAltura()*produto.getProfundidade()*produto.getLargura());
+		produto.setFotos(imageGalleryService.getFotos(produto.getId()));
+		produtoRepository.save(produto);
 		andView.addObject("produtoObj", new Produto());
 		return andView;
 
@@ -52,7 +63,7 @@ public class ProdutoController {
 	public ModelAndView editar(@PathVariable("idProduto") Long idProduto) {
 		andView = new ModelAndView("cadastro/cadastroProduto");
 		Optional<Produto> produto = produtoRepository.findById(idProduto);
-
+		alterar = true;
 		andView.addObject("produtoObj", produto.get());
 		return andView;
 
