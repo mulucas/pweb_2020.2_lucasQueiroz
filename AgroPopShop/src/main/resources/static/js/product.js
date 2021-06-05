@@ -29,14 +29,15 @@
                         	$("#form")[0].reset();
                         	$('#success').css('display','block');
                             $("#error").text("");
-                            $("#success").html("Product Inserted Succsessfully.");
+                            $("#success").html("Foto cadastrada com sucesso");
                             $('#success').delay(2000).fadeOut('slow');
+                            location.reload();
                          }	   
                         },
                         error: function(e) {
                         	$('#loader').hide();
                         	$('#error').css('display','block');
-                            $("#error").html("Oops! something went wrong.");
+                            $("#error").html("Oops! deu algum erro ai");
                             $('#error').delay(5000).fadeOut('slow');
                             location.reload();
                         }

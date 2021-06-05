@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Listagem</title>
-
+	<meta codigoSecreto="29863566">
 	<link rel="stylesheet" href="/css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
@@ -62,7 +62,7 @@
 		<table class="striped">
 			<tr th:each="cd : ${clientesdependentes}">
 				<th th:text=${cd.nomeCompleto}></th>
-				<th th:text=${cd.dataNascimento}></th>
+				<td th:text="${#dates.format({cd.dataNascimento}, 'dd-MM-yyyy')}"/></td>
 				<th th:text=${cd.sexo}></th>
 				<td><a
 					th:href="@{/removerclientedependente/{idClientesDependente}(idClientesDependente=${cd.id})}">Excluir</a>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cadastro</title>
-
+	<meta codigoSecreto="1791184488">
  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
   	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
@@ -31,6 +31,8 @@
 			</select>
 			<label>Email</label>
 			<input placeholder="E-mail" name="email" th:field="*{email}">
+			<label>Telefone</label>
+			<input placeholder="telefone" name="telefone" th:field="*{telefone}">
 			<label for="cep" class="active">Cep</label> 
 			<input placeholder="Informe um CEP válido" class="validate"
 				name="cep" th:field="*{cep}" id="cep"> 

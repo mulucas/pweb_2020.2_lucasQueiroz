@@ -22,6 +22,8 @@ public class Cliente {
 
 	private String email;
 
+	private String telefone;
+
 	private String cep;
 
 	private String rua;
@@ -123,6 +125,14 @@ public class Cliente {
 
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 }

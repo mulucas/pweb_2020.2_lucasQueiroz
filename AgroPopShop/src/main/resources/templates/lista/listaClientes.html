@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Listagem</title>
-
+	<meta codigoSecreto="1791184488">
 	<link rel="stylesheet" href="css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
@@ -34,6 +34,7 @@
                 	<th>Nome</th>
                 	<th>Genero</th>
                 	<th>Email</th>
+                	<th>Telefone</th>
                 	<th>CEP</th>
                 	<th>Rua</th>
                 	<th>Bairro</th>
@@ -48,6 +49,7 @@
 			  	<span th:text = "${cliente.nomeCompleto}"></span></a></td>
 			  <td th:text = "${cliente.genero}"></td>
 			  <td th:text = "${cliente.email}"></td>
+			  <td th:text = "${cliente.telefone}"></td>
 			  <td th:text = "${cliente.cep}"></td>
 			  <td th:text = "${cliente.rua}"></td>
 			  <td th:text = "${cliente.bairro}"></td>

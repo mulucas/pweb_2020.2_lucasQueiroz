@@ -28,10 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.w3c.dom.ls.LSInput;
 
-import com.pweb.agropopshop.model.Cliente;
-import com.pweb.agropopshop.model.ClienteDependente;
 import com.pweb.agropopshop.model.Foto;
 import com.pweb.agropopshop.model.Produto;
 import com.pweb.agropopshop.repository.ProdutoRepository;
@@ -48,7 +45,7 @@ public class FotoController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private ModelAndView andViewClienteDependente = new ModelAndView("formfoto");
+	private ModelAndView andViewClienteDependente = new ModelAndView("cadastro/cadastroFoto");
 
 	private Long idProdutoAtual;
 
@@ -113,7 +110,6 @@ public class FotoController {
 	@ResponseBody
 	void showImage(@PathVariable("id") Long id, HttpServletResponse response, Optional<Foto> imageGallery)
 			throws ServletException, IOException {
-		log.info("Id :: " + id);
 		imageGallery = imageGalleryService.getFotoById(id);
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 		response.getOutputStream().write(imageGallery.get().getImage());
@@ -143,6 +139,6 @@ public class FotoController {
 		} else {
 			map.addAttribute("images", images);
 		}
-		return "fotos";
+		return "lista/listaFotos";
 	}
 }
